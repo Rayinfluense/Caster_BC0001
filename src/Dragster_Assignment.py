@@ -194,7 +194,7 @@ def main(plotting):
 
     while(distance <= dist_goal):
         if initialRun: #Ask for gear before a time step is taken
-            (gear_demand, throttle) = student_AutomaticGearbox(car.dyn.gear, car.dyn.rpm, car.dyn.acc, car.dyn.speed, car.dyn.throttle, car.dyn.dist, car.dyn.time)
+            (gear_demand, throttle) = student_AutomaticGearbox(car.dyn.gear + 1, car.dyn.rpm, car.dyn.acc, car.dyn.speed, car.dyn.throttle, car.dyn.dist, car.dyn.time)
             initialRun = False
         else:
             #Get telemetry
