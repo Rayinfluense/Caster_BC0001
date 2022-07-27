@@ -180,7 +180,7 @@ def main(plotting):
     #If plotting is set to 0, no plots will appear at the end of the
     #run and console output will be minimized.
 
-    print("Main program Version py_1.0")
+    print("Main program Version 2.0")
 
     #Establish communication with car
 
@@ -200,24 +200,24 @@ def main(plotting):
             #Get telemetry
             telemetry = caster_GetTelemetry(car, plotting) #Also steps car in simulation
             telemetrylog.append(copy.deepcopy(telemetry))
-            (gear_demand, throttle) = student_AutomaticGearbox(telemetry.Gear, telemetry.RPM, telemetry.LongAcc, telemetry.Velocity, telemetry.Throttle, telemetry.Distance, telemetry.TimeLap)
+            (gear_demand, throttle) = student_AutomaticGearbox(telemetry.Gear + 1, telemetry.RPM, telemetry.LongAcc, telemetry.Velocity, telemetry.Throttle, telemetry.Distance, telemetry.TimeLap)
             distance = telemetry.Distance
         if plotting:
-            if gear_demand < 0:
+            if gear_demand <= 0:
                 print("You have tried to put in reverse or neutral (", gear_demand, "). While this works physically, the simulation will probably get stuck in an infinite loop since the car won't reach the finish line")
-            if gear_demand > car.gearbox.gears:
-                print("You have tried to put in the gear ", gear_demand + 1, ". This car only has ", car.gearbox.gears + 1, "gears. Did you think you could cheat? Picking gear ", car.gearbox.gears + 1, " instead.")
+            if gear_demand > car.gearbox.gears + 1:
+                print("You have tried to put in the gear ", gear_demand, ". This car only has ", car.gearbox.gears + 1, "gears. Did you think you could cheat? Picking gear ", car.gearbox.gears + 1, " instead.")
             if throttle > 1:
-                print("You have tried to give a throttle higher than 1 (", throttle, "), which would be equal to pressing the pedal through the floor. Since I don''t want holes in the floor, i will change the throttle to 1")
+                print("You have tried to give a throttle higher than 1 (", throttle, "), which would be equal to pressing the pedal through the floor. Since I don't want holes in the floor, i will change the throttle to 1")
             if throttle < 0:
                 print("You have tried to give a throttle lower than 0, which would be equal to ripping the pedal loose. Since I want to keep the pedal I will change the throttle to 0")
             if throttle == 0:
                 print("No throttle is being given. This won't move the car and will probably leave the simulation stuck in a loop.")
             if round(gear_demand) != gear_demand:
                 print("Gear input must be an integer within the range [1, 4]. The input was " ,gear_demand + 1 ,"." )
-        if gear_demand < -1:
+        if gear_demand < 0:
             gear_demand = 0
-        gear_demand = round(gear_demand)
+        gear_demand = round(gear_demand - 1)
         car.dyn.throttle = throttle
         prevshifttime = caster_GearShift(gear_demand, prevshifttime, car, plotting) #Also updates gear in car.dyn
 

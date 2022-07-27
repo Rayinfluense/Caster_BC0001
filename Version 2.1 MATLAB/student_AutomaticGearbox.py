@@ -2,7 +2,6 @@ from Car import Car
 from caster_AutomaticGearbox import caster_AutomaticGearbox
 
 def student_AutomaticGearbox(Gear, RPM, LongAcc, Velocity, Throttle, Distance, TimeLap):
-
     car = Car() #Contains all data about the car
 
     final_drive_ratio = car.gearbox.final
@@ -24,5 +23,4 @@ def student_AutomaticGearbox(Gear, RPM, LongAcc, Velocity, Throttle, Distance, T
 
     #For comparison, uncomment the line below to see how Caster gearbox performs
     gear_demand = caster_AutomaticGearbox(Gear, RPM, LongAcc, Velocity, Throttle, Distance, TimeLap)
-
     return (gear_demand, throttle)

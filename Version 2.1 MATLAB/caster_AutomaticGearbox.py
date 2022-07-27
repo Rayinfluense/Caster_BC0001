@@ -65,5 +65,4 @@ def caster_AutomaticGearbox(Gear, RPM, LongAcc, Velocity, Throttle, Distance, Ti
     #To make sure the simulator doe snot get stuck in neutral/revers
     else:
         gear_demand = 4
-
     return gear_demand

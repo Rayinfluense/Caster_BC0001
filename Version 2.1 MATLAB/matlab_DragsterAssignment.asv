@@ -1,4 +1,4 @@
-function [telemetrylog, finishtime] = matlab_DragsterAssignment(online, plotting)
+function [telemetrylog, finishtime] = matlab_DragsterAssignment(online, plotting, python)
     %MATLAB_DRAGSTERASSIGNMENT
     %   � CASTER / H�kan Richardsson, Richard L�fwenberg, Jonas Johnsson,
     %   ALexander H�gglund
@@ -21,6 +21,7 @@ function [telemetrylog, finishtime] = matlab_DragsterAssignment(online, plotting
     if(nargin == 0)
         online = 0;
         plotting = 1;
+        python = 0;
     elseif(nargin == 1)
         plotting = 1;
     end
@@ -33,18 +34,32 @@ function [telemetrylog, finishtime] = matlab_DragsterAssignment(online, plotting
 	initialRun = 1;
     while(telemetry.Distance <= dist_goal || online)
         if(initialRun) % should ask for gear before a timestep is taken
-			[gear_demand, throttle] = student_AutomaticGearbox(car.dyn.gear, car.dyn.rpm,...
-                car.dyn.acc, car.dyn.speed, car.dyn.throttle, car.dyn.dist, car.dyn.time);
-			initialRun = 0;
+            if(python)
+                pyrunstring = "run_studentGearbox.py " + num2str(car.dyn.gear) + " " + num2str(car.dyn.rpm) + " " +...
+                num2str(car.dyn.acc) + " " + num2str(car.dyn.speed) + " " + num2str(car.dyn.throttle) + " " +...
+                num2str(car.dyn.dist) + " " + num2str(car.dyn.time);
+			    [gear_demand, throttle] = pyrunfile(pyrunstring, ["gear_demand", "throttle"]);
+			    initialRun = 0;
+            else
+			    [gear_demand, throttle] = student_AutomaticGearbox(car.dyn.gear, car.dyn.rpm,...
+                    car.dyn.acc, car.dyn.speed, car.dyn.throttle, car.dyn.dist, car.dyn.time);
+			    initialRun = 0;
+            end
         else
              % Get Telemetry
             [telemetry, car] = caster_GetTelemetry(car, udpInterfaceTelemetry,plotting);
 
             telemetrylog = [telemetrylog, telemetry]; %#ok<AGROW>
-
-            [gear_demand, throttle] = student_AutomaticGearbox(telemetry.Gear, telemetry.RPM, ...
-                    telemetry.LongAcc, telemetry.Velocity, telemetry.Throttle, ...
-                    telemetry.Distance, telemetry.TimeLap);           
+            if(python)
+                pyrunstring = "run_studentGearbox.py " + num2str(telemetry.Gear) + " " + num2str(telemetry.RPM) + " " +...
+                num2str(telemetry.LongAcc) + " " + num2str(telemetry.Velocity) + " " + num2str(telemetry.Throttle) + " " +...
+                num2str(telemetry.Distance) + " " + num2str(telemetry.TimeLap);
+                [gear_demand, throttle] = student_AutomaticGearbox(pyrunstring, ["gear_demand", "throttle"]);  
+            else
+                [gear_demand, throttle] = student_AutomaticGearbox(telemetry.Gear, telemetry.RPM, ...
+                        telemetry.LongAcc, telemetry.Velocity, telemetry.Throttle, ...
+                        telemetry.Distance, telemetry.TimeLap);  
+            end
         end        				
 
 		if(plotting)

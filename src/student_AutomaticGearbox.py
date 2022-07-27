@@ -2,8 +2,6 @@ from Car import Car
 from caster_AutomaticGearbox import caster_AutomaticGearbox
 
 def student_AutomaticGearbox(Gear, RPM, LongAcc, Velocity, Throttle, Distance, TimeLap):
-    #SHOULD THIS BE A CLASS INSTEAD SO THE STUDENT CAN USE "GLOBAL" VARIABLES RATHER THAN HAVING TO RECALCULATE CONSTANTS
-    #EACH TIME THE METHOD IS CALLED? IS IT WITHIN THE SCOPR OF THE ASSIGNMENT?
 
     car = Car() #Contains all data about the car
 
@@ -16,8 +14,8 @@ def student_AutomaticGearbox(Gear, RPM, LongAcc, Velocity, Throttle, Distance, T
     #More data can be obtained from the car object similarly.
 
     # Logic used for gear shifting
-    speed = Velocity * 3.6
-    throttle = 1
+    speed = Velocity * 3.6 #m/s to km/h
+    throttle = 1 #Full throttle
 
     if speed < 30:
         gear_demand = 1
@@ -25,6 +23,6 @@ def student_AutomaticGearbox(Gear, RPM, LongAcc, Velocity, Throttle, Distance, T
         gear_demand = 4
 
     #For comparison, uncomment the line below to see how Caster gearbox performs
-    gear_demand = caster_AutomaticGearbox(Gear + 1, RPM, LongAcc, Velocity, Throttle, Distance, TimeLap)
+    gear_demand = caster_AutomaticGearbox(Gear, RPM, LongAcc, Velocity, Throttle, Distance, TimeLap)
 
-    return (gear_demand - 1, throttle)
+    return (gear_demand, throttle)
