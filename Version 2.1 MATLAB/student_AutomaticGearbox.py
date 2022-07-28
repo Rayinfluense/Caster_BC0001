@@ -1,3 +1,4 @@
+#Version 220728
 from Car import Car
 from caster_AutomaticGearbox import caster_AutomaticGearbox
 
@@ -10,7 +11,7 @@ def student_AutomaticGearbox(Gear, RPM, LongAcc, Velocity, Throttle, Distance, T
     torque_vector = car.engine.torque #List of torque values. torque_vector[i] gives maximum torque at rpm_vector[i] rpm
     wheel_radius = car.wheel.radius
 
-    #More data can be obtained from the car object similarly.
+    # More data can be obtained from the car object similarly.
 
     # Logic used for gear shifting
     speed = Velocity * 3.6 #m/s to km/h

@@ -1,6 +1,5 @@
 function [gear_demand, Throttle] = student_AutomaticGearbox(Gear, RPM, LongAcc, Velocity, Throttle, Distance, TimeLap)
 % Convert m/s to km/h
-disp("RUNNING MATLAB")
 Speed = Velocity * 3.6;
 Throttle = 1;
 % Check the speed and determine gear

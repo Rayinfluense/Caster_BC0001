@@ -1,22 +1,9 @@
-#Version 220728
+#Copy of Car.py with certain parameters exclusively relevant for simulation removed.
+#Not everything in here will be essential for a good result on the assignment
 import numpy as np
 
 class Car(object):
     def __init__(self):
-        class Dyn(object):
-            # Dynamical parameters of car
-            def __init__(self, car):
-                self.rpm = car.engine.idle_rpm
-                self.speed = 0
-                self.acc = 0
-                self.dist = 0
-                self.time = 0
-                self.w_wheel = 0
-                self.prevshifttime = -1
-                self.gotogear = 1
-                self.gear = 0
-                self.throttle = 0
-
         class Pacejka():
             #Tires
             def __init__(self):
@@ -57,9 +44,9 @@ class Car(object):
             def __init__(self):
                 #4 gears
                 self.gears = 4 - 1
-                #Gear ratios
+                # Gear ratios
                 self.ratio = np.array([3.8, 2.3, 1.4, 0.95])
-                #Final ratio applied on each gear
+                # Final ratio applied on each gear
                 self.final = 4.03
                 self.shiftingtime = 0.1
 
@@ -100,9 +87,4 @@ class Car(object):
         # Aero
         self.aero = Aero()
 
-        #Dynamical variables
-        self.dyn = Dyn(self)
-
         self.optimal_slip = 15.5 # Percent
-
-        self.version = 220728

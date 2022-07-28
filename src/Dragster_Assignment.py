@@ -165,7 +165,15 @@ def caster_InitCommunication(plotting):
         print("InitCommunication Version ", versionnr)
 
     car = Car()
-    return car
+    if not hasattr(car, "version"):
+        print("It's fun to modify the car, but for this task it is considered cheating and not allowed.")
+        return
+    else:
+        if car.version == 220728:
+            return car
+        else:
+            print("It's fun to modify the car, but for this task it is considered cheating and not allowed.")
+            return
 
 def main(plotting):
     #CASTER / Håkan Richardsson, Richard Löfwenberg, Jonas Johnsson, Alexander Hägglund
