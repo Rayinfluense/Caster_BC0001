@@ -25,7 +25,7 @@ def student_AutomaticGearbox(gear, RPM, longAcc, velocity, throttle, distance, t
         gear_demand = 4 # Fourth gear
 
     # For comparison, uncomment the line below to see how Caster gearbox performs
-    # gear_demand = caster_AutomaticGearbox(Gear, RPM, LongAcc, Velocity, Throttle, Distance, TimeLap)
+    #gear_demand = caster_AutomaticGearbox(gear, RPM, longAcc, velocity, throttle, distance, timeLap)
 
     #Return the selected gear
     return (gear_demand, throttle)
