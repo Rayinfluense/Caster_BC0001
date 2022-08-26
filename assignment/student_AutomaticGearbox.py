@@ -1,18 +1,6 @@
-from Car import Car
 from caster_AutomaticGearbox import caster_AutomaticGearbox
 
 def student_AutomaticGearbox(gear, RPM, longAcc, velocity, throttle, distance, timeLap):
-
-    car = Car() # Contains all data about the car
-
-    # Examples of data that can be obtained from car object. See Car_reference.py for all available parameters.
-
-    final_drive_ratio = car.gearbox.final
-    gear_ratios = car.gearbox.ratio #List of ratios for gears 1 through 4. Gear 0 is neutral and outputs 0 torque.
-    rpm_vector = car.engine.rpm #List of rpm values
-    torque_vector = car.engine.torque #List of torque values. torque_vector[i] returns maximum torque output at rpm_vector[i] rpm
-    wheel_radius = car.wheel.radius
-    optimal_slip = car.optimal_slip # Percent
 
     #Convert m/s to km/h
     speed = velocity * 3.6
